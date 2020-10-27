@@ -11,9 +11,10 @@ change owner and permissions on storage folder
 
 run docker in .docker/dev/ folder 
     sudo docker-compose up -d --build
- 
-if is used vbox in the browser on ip-of-vbox:8080 
-or localhost:8080
+
+add in /etc/hosts file <ipaddres> articlesvuelaravel.deb.test
+if is used vbox in the browser on articlesvuelaravel.deb.test:8080/
+or articlesvuelaravel.deb.test
 
 can connect to mariadb on port 4306
             - MYSQL_ROOT_PASSWORD=zoran   
