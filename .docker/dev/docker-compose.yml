@@ -1,0 +1,41 @@
+version: "3.2"
+services:
+    articlesvuelaravel:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: articlesvuelaravel
+        networks:
+          articlesvuelaravel_net:
+            ipv4_address: 172.172.201.100
+        volumes:
+            - /var/www/html/vue-lessons/articlesvuelaravel/:/var/www/html/articlesvuelaravel
+        links:
+            - articlesvuelaravel-mariadb-10.1
+        tty: true
+        ports:
+          - '8080:80'
+
+    articlesvuelaravel-mariadb-10.1:
+        image: mariadb:10.1
+        container_name: articlesvuelaravel-mariadb-10.1
+        networks:
+          articlesvuelaravel_net:
+            ipv4_address: 172.172.201.101
+        volumes:
+            - ../db_data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=zoran
+            - MYSQL_DATABASE=articlesvuelaravel
+            - MYSQL_USER=zoran
+            - MYSQL_PASSWORD=zoran
+            - MYSQL_ROOT_HOST=0.0.0.0
+        ports:
+          - '4306:3306'
+networks:
+  articlesvuelaravel_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.172.201.0/24
