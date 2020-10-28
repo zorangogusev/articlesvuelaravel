@@ -16,9 +16,10 @@ add in /etc/hosts file <ipaddres> articlesvuelaravel.deb.test
 if is used vbox in the browser on articlesvuelaravel.deb.test:8080/
 or articlesvuelaravel.deb.test
 
-can connect to mariadb on port 4306
-            - MYSQL_ROOT_PASSWORD=zoran   
-            - MYSQL_DATABASE=articlesvuelaravel
-            - MYSQL_USER=zoran            
-            - MYSQL_PASSWORD=zoran        
-            - MYSQL_ROOT_HOST=0.0.0.0     
+to connect to database add/replace in .env file
+    DB_CONNECTION=mysql
+    DB_HOST=articlesvuelaravel-mariadb-10.1
+    DB_PORT=3306
+    DB_DATABASE=articlesvuelaravel
+    DB_USERNAME=zoran
+    DB_PASSWORD=zoran   
