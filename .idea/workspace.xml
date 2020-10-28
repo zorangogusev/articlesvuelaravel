@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4bc5751-7b99-41e7-a875-3da14745e1b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.docker/dev/articlesvuelaravel.conf" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/dev/articlesvuelaravel.conf" afterDir="false" />
+    <list default="true" id="c4bc5751-7b99-41e7-a875-3da14745e1b1" name="Default Changelist" comment="gitignore files">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +147,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.docker" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pizzashop" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -202,7 +204,8 @@
       <option name="presentableId" value="Default" />
       <updated>1603800766948</updated>
       <workItem from="1603800770581" duration="909000" />
-      <workItem from="1603830857106" duration="5849000" />
+      <workItem from="1603830857106" duration="7548000" />
+      <workItem from="1603877928705" duration="7203000" />
     </task>
     <task id="LOCAL-00001" summary="Second Commit">
       <created>1603830963477</created>
@@ -218,7 +221,35 @@
       <option name="project" value="LOCAL" />
       <updated>1603836097757</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Docker files">
+      <created>1603837083947</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603837083947</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gitignore files">
+      <created>1603837897104</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603837897104</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Docker files">
+      <created>1603879593911</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603879593911</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Database - create migration, seeder">
+      <created>1603881441850</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1603881441850</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +260,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -237,15 +270,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Commit" />
+    <MESSAGE value="gitignore files" />
     <MESSAGE value="Docker files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Docker files" />
+    <MESSAGE value="Database - create migration, seeder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Database - create migration, seeder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>17</line>
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/ArticleController.php</url>
+          <line>40</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
