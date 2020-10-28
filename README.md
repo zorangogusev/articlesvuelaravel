@@ -1,5 +1,5 @@
 Used Technologies
-Docker (PHP7.3, Maria-DB10.1)
+Docker (PHP7.3, Maria-DB10.1), Laravel8.0
 
 
 in .docker/dev/ folder 
@@ -23,3 +23,9 @@ to connect to database add/replace in .env file
     DB_DATABASE=articlesvuelaravel
     DB_USERNAME=zoran
     DB_PASSWORD=zoran   
+
+to execute migrations and seeds enter in the docker bash in /var/www/html/articlesvuelaravel folder
+    sudo docker exec -it articlesvuelaravel bash
+    cd /var/www/html/articlesvuelaravel/
+    php artisan migrate
+    php artisan db:seed
