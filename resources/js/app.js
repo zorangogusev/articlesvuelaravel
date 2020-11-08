@@ -2,11 +2,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-// import App from './App.vue'
 import Master from './components/layouts/Master.vue'
-
 import router from './router';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
+Vue.use(BootstrapVue)
 
 new Vue({
     router,

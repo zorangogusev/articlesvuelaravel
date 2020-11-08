@@ -1,18 +1,25 @@
 <template>
     <div class="container">
         <h1>Manage Articles</h1>
-        <form @submit.prevent="addArticle" class="mb-4">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Title" v-model="article.title">
-            </div>
-            <div class="form-group">
-                <textarea type="text" class="form-control" placeholder="Enter Body" v-model="article.body"></textarea>
-            </div>
-            <div class="text-right">
-                <button type="submit" @click="" class="btn btn-primary">Save</button>
-            </div>
+        <div class="text-right">
+            <b-button v-b-modal.modal-article @click="modal_article_title = 'Add New Article'">Add New Article</b-button>
 
-        </form>
+            <b-modal id="modal-article" centered :title="modal_article_title" :hide-footer="true">
+                <form @submit.prevent="addArticle" class="mb-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Title" v-model="article.title">
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" placeholder="Enter Body" v-model="article.body"></textarea>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" @click="" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
+            </b-modal>
+        </div>
+
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url }]" class="page-item">
@@ -52,7 +59,8 @@
                 },
                 article_id: '',
                 pagination: {},
-                edit: false
+                edit: false,
+                modal_article_title: 'Add New Article'
             }
         },
 
@@ -63,7 +71,7 @@
         methods: {
             fetchArticles(page_url) {
                 let vm = this;
-                page_url = page_url || 'api/articles';
+                page_url = page_url || 'api/articles'
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
@@ -71,7 +79,7 @@
                         this.articles = res.data;
                         vm.makePagination(res.meta, res.links);
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => console.log(err))
             },
             makePagination(meta, links) {
                 let pagination = {
@@ -81,7 +89,7 @@
                     prev_page_url: links.prev
                 };
 
-                this.pagination = pagination;
+                this.pagination = pagination
             },
             deleteArticle(id) {
                 // console.log('delete works');
@@ -90,8 +98,8 @@
                 })
                     .then(res => res.json())
                     .then(data => {
-                        alert('Article Deleted');
-                        this.fetchArticles();
+                        alert('Article Deleted')
+                        this.fetchArticles()
                     })
                     .catch(err => console.log(err))
             },
@@ -106,10 +114,10 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            this.article.title = '';
-                            this.article.body = '';
-                            alert('Article Added');
-                            this.fetchArticles();
+                            this.article.title = ''
+                            this.article.body = ''
+                            alert('Article Added')
+                            this.fetchArticles()
                         })
                         .catch(err => console.log(err))
                 } else {
@@ -122,20 +130,23 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            this.article.title = '';
-                            this.article.body = '';
-                            alert('Article Updated');
-                            this.fetchArticles();
+                            this.article.title = ''
+                            this.article.body = ''
+                            alert('Article Updated')
+                            this.$bvModal.hide('modal-article')
+                            this.fetchArticles()
                         })
                         .catch(err => console.log(err))
                 }
             },
             editArticle(article) {
-                this.edit = true;
-                this.article.id = article.id;
-                this.article.article_id = article.id;
-                this.article.title = article.title;
-                this.article.body = article.body;
+                this.edit = true
+                this.article.id = article.id
+                this.article.article_id = article.id
+                this.article.title = article.title
+                this.article.body = article.body
+                this.modal_article_title = 'Edit Article'
+                this.$bvModal.show('modal-article')
             }
         }
     };
