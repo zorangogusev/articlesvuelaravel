@@ -20,21 +20,7 @@
             </b-modal>
         </div>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li v-bind:class="[{disabled: !pagination.prev_page_url }]" class="page-item">
-                    <a @click="fetchArticles(pagination.prev_page_url)" class="page-link" href="#">Previous</a>
-                </li>
-
-                <li class="page-item disabled">
-                    <a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a>
-                </li>
-
-                <li v-bind:class="[{disabled: !pagination.next_page_url }]" class="page-item">
-                    <a @click="fetchArticles(pagination.next_page_url)" class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <Pagination v-bind:pagination="pagination" @fetchArticlesNextPageUrl="fetchArticles"/>
 
         <Article v-for="article in articles" v-bind:article="article" v-bind:key="article.id" @deleteArticleEvent="deleteArticle" @editArticleEvent="editArticle"/>
 
@@ -43,11 +29,13 @@
 
 <script>
     import Article from './Article'
+    import Pagination from './Pagination'
 
     export default {
         name: 'ManageArticles',
         components: {
             Article,
+            Pagination,
         },
         data() {
             return {
