@@ -29,22 +29,19 @@
             </ul>
         </nav>
 
-        <div class="card card-body mb-2" v-for="article in articles" v-bind:key="article.id">
-            <h4>{{ article.title }}</h4>
-            <p>{{ article.body }}</p>
-            <hr>
-            <div>
-                <button @click="editArticle(article)" class="btn btn-dark">Edit</button>
-                <button @click="deleteArticle(article.id)" class="btn btn-danger">Delete</button>
-            </div>
+        <Article v-for="article in articles" v-bind:article="article" v-bind:key="article.id" @deleteArticleEvent="deleteArticle" @editArticleEvent="editArticle"/>
 
-        </div>
     </div>
 </template>
 
 <script>
+    import Article from './Article'
+
     export default {
         name: 'ManageArticles',
+        components: {
+            Article,
+        },
         data() {
             return {
                 articles: [],
@@ -87,18 +84,16 @@
                 this.pagination = pagination;
             },
             deleteArticle(id) {
-                if (confirm('Delete!!!')) {
-                    // console.log('delete works');
-                    fetch(`api/article/${id}`, {
-                        method: 'delete'
+                // console.log('delete works');
+                fetch(`api/article/${id}`, {
+                    method: 'delete'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert('Article Deleted');
+                        this.fetchArticles();
                     })
-                        .then(res => res.json())
-                        .then(data => {
-                            alert('Article Deleted');
-                            this.fetchArticles();
-                        })
-                        .catch(err => console.log(err))
-                }
+                    .catch(err => console.log(err))
             },
             addArticle() {
                 if(this.edit === false) {
