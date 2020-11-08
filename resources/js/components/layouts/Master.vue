@@ -6,9 +6,9 @@
 </template>
 
 <script>
-    import Navbar from './layouts/Navbar.vue';
+    import Navbar from './Navbar.vue';
     export default {
-        name:"app",
+        name:"master",
         components: {
             Navbar
         },
