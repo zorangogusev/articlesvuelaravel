@@ -58,18 +58,20 @@
 
         methods: {
             fetchArticles(page_url) {
+                // console.log(axios.defaults.baseURL);
+
                 let vm = this;
-                page_url = page_url || 'api/articles'
-                fetch(page_url)
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log(res);
-                        this.articles = res.data;
-                        vm.makePagination(res.meta, res.links);
+                page_url = page_url || 'articles'
+                axios.get(page_url)
+                    .then(response => {
+                        console.log(response);
+                        this.articles = response.data.data;
+                        vm.makePagination(response.data.meta, response.data.links);
                     })
-                    .catch(err => console.log(err))
+                    .catch(error => console.log(error))
             },
             makePagination(meta, links) {
+                // console.log('makePagination here')
                 let pagination = {
                     current_page: meta.current_page,
                     last_page: meta.last_page,
@@ -81,10 +83,9 @@
             },
             deleteArticle(id) {
                 // console.log('delete works');
-                fetch(`api/article/${id}`, {
+                axios.delete(`article/${id}`, {
                     method: 'delete'
                 })
-                    .then(res => res.json())
                     .then(data => {
                         alert('Article Deleted')
                         this.fetchArticles()
@@ -93,35 +94,29 @@
             },
             addArticle() {
                 if(this.edit === false) {
-                    fetch('api/article', {
-                        method: 'post',
-                        body: JSON.stringify(this.article),
-                        headers: {
-                            'content-type' : 'application/json'
-                        }
+                    axios.post('article', {
+                        'title': this.article.title,
+                        'body': this.article.body
                     })
-                        .then(res => res.json())
                         .then(data => {
                             this.article.title = ''
                             this.article.body = ''
+                            this.$bvModal.hide('modal-article')
                             alert('Article Added')
                             this.fetchArticles()
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => console.log(error))
                 } else {
-                    fetch('api/article', {
-                        method: 'put',
-                        body: JSON.stringify(this.article),
-                        headers: {
-                            'content-type' : 'application/json'
-                        }
+                    axios.put('article', {
+                        'article_id': this.article.id,
+                        'title': this.article.title,
+                        'body': this.article.body
                     })
-                        .then(res => res.json())
                         .then(data => {
                             this.article.title = ''
                             this.article.body = ''
-                            alert('Article Updated')
                             this.$bvModal.hide('modal-article')
+                            alert('Article Updated')
                             this.fetchArticles()
                         })
                         .catch(err => console.log(err))
