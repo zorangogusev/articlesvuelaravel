@@ -5,8 +5,11 @@ window.Vue = require('vue');
 import Master from './components/layouts/Master.vue'
 import router from './router';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import AnimateCss from 'animate.css/animate.min.css'
 
 Vue.use(BootstrapVue)
+Vue.use(AnimateCss)
+
 
 new Vue({
     router,

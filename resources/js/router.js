@@ -23,5 +23,9 @@ export default new Router({
             name:'manage-articles',
             component: ManageArticles
         }
-    ]
+    ],
+    // mode: 'history',
+    beforeEach: () => {
+
+    }
 });
