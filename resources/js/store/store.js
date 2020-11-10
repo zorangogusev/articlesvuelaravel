@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     state: {
         articles: [],
         pagination: {},
+        token: localStorage.getItem('access_token') || null
     },
     getters: {
         getArticles(state) {
@@ -17,6 +18,9 @@ export const store = new Vuex.Store({
         getPagination(state) {
             return state.pagination
         },
+        loggedIn(state) {
+            return state.token !== null
+        }
     },
     mutations: {
         fetchArticles(state, articles) {
@@ -25,6 +29,12 @@ export const store = new Vuex.Store({
         pagination(state, pagination) {
             state.pagination = pagination
         },
+        getToken(state, token) {
+            state.token = token
+        },
+        destroyToken(state) {
+            state.token = null
+        }
     },
     actions: {
         fetchArticles(context, page_url) {
@@ -76,6 +86,74 @@ export const store = new Vuex.Store({
                     this.dispatch('fetchArticles')
                 })
                 .catch(err => console.log(err))
+        },
+        getToken(context, credentials) {
+
+            return new Promise((resolve, reject) => {
+                axios.post('login', {
+                    'username': credentials.username,
+                    'password': credentials.password,
+                })
+                    .then(response => {
+                        // console.log('response is ' + response.data.access_token)
+
+                        const token = response.data.access_token
+
+                        localStorage.setItem('access_token', token)
+                        context.commit('getToken', token)
+                        resolve(response)
+                    })
+                    .catch(error => {
+                        // console.log('error is: ' + error)
+                        reject(error)
+                    })
+            })
+        },
+        register(context, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('register', {
+                    'name': data.name,
+                    'email': data.email,
+                    'password': data.password
+                })
+                    .then(result => {
+
+                        resolve(result)
+                    })
+                    .catch(error => {
+
+
+                        reject(error)
+                    })
+            })
+        },
+        destroyToken(context) {
+            // axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
+
+            if(context.getters.loggedIn) {
+                return new Promise((resolve, reject) => {
+                    axios.post('logout')
+                        .then(result => {
+                            console.log('result is: ' + result)
+
+                            localStorage.removeItem('access_token')
+                            context.commit('destroyToken')
+
+                            resolve(result)
+                        })
+                        .catch(error => {
+                            console.log('error is: ' + error)
+
+                            localStorage.removeItem('access_token')
+                            context.commit('destroyToken')
+                            reject(error)
+                        })
+
+                })
+            }
         }
     }
+
 })
