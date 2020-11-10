@@ -22,7 +22,7 @@
 
         <Pagination />
 
-        <Article v-for="article in getArticles" :article="article" :key="article.id" @deleteArticleEvent="deleteArticle" @editArticleEvent="editArticle"/>
+        <Article v-for="article in getArticles" :article="article" :key="article.id" @editArticleEvent="editArticle"/>
 
     </div>
 </template>
@@ -64,16 +64,6 @@
         methods: {
             fetchArticles(page_url) {
                 this.$store.dispatch('fetchArticles', page_url)
-            },
-            deleteArticle(id) {
-                axios.delete(`article/${id}`, {
-                    method: 'delete'
-                })
-                    .then(data => {
-                        alert('Article Deleted')
-                        this.fetchArticles()
-                    })
-                    .catch(err => console.log(err))
             },
             addArticle() {
                 if(this.edit === false) {

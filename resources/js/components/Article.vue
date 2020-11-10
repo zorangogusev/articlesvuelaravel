@@ -22,9 +22,8 @@
         },
         methods: {
             deleteArticle(id) {
-                // console.log('id is: ' + id)
                 if (confirm('Delete!!!')) {
-                    this.$emit('deleteArticleEvent', id)
+                    this.$store.dispatch('deleteArticle', { id: id})
                 }
             },
             editArticle(article) {

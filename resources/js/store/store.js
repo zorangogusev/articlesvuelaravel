@@ -42,6 +42,16 @@ export const store = new Vuex.Store({
                     context.commit('pagination', pagination)
                 })
                 .catch(error => console.log(error))
+        },
+        deleteArticle(context, data) {
+            axios.delete(`article/${data.id}`, {
+                method: 'delete'
+            })
+                .then(data => {
+                    alert('Article Deleted')
+                    this.dispatch('fetchArticles')
+                })
+                .catch(err => console.log(err))
         }
     }
 })
