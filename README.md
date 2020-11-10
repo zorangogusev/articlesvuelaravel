@@ -35,3 +35,12 @@ to execute migrations and seeds enter in the docker bash in /var/www/html/articl
     cd /var/www/html/articlesvuelaravel/
     php artisan migrate
     php artisan db:seed
+
+
+to install passport use
+    php artisan passport:install
+
+in .env file(user own credentials)
+    PASSPORT_LOGIN_ENDPOINT=http://articlesvuelaravel.deb.test:8080/oauth/token
+    PASSPORT_CLIENT_UP=2
+    PASSPORT_CLIENT_SECRET=kHC0vEGoEQLfZsIHgm4riYi3pxbRuEDikJ9PqE5F
