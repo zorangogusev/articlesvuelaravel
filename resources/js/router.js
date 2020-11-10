@@ -25,28 +25,36 @@ export default new VueRouter({
         {
             path: '/manage-articles',
             name:'manage-articles',
-            component: ManageArticles
+            component: ManageArticles,
+            meta: {
+                requiresAuth: true,
+            }
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: Login,
+            meta: {
+                requiresGuest: true,
+            }
         },
         {
             path: '/register',
             name: 'register',
-            component: Register
+            component: Register,
+            meta: {
+                requiresGuest: true,
+            }
         },
         {
             path: '/logout',
             name: 'logout',
-            component: Logout
+            component: Logout,
+            meta: {
+                requiresAuth: true,
+            }
         },
     ],
     mode: 'history',
     history: true,
-    // beforeEach: () => {
-    //
-    // },
-
 });

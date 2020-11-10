@@ -4,7 +4,7 @@
             <ul class="m-0">
                 <router-link to="/">Home</router-link>
                 <router-link to="/about">About</router-link>
-                <router-link to="/manage-articles">Manage Articles</router-link>
+                <router-link v-if="loggedIn" to="/manage-articles">Manage Articles</router-link>
                 <router-link v-if="!loggedIn" to="/login">Login</router-link>
                 <router-link v-if="!loggedIn" to="/register">Register</router-link>
                 <router-link v-if="loggedIn" to="/logout">Logout</router-link>

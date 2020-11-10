@@ -117,19 +117,14 @@ export const store = new Vuex.Store({
                     'password': data.password
                 })
                     .then(result => {
-
                         resolve(result)
                     })
                     .catch(error => {
-
-
                         reject(error)
                     })
             })
         },
         destroyToken(context) {
-            // axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
-
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
 
             if(context.getters.loggedIn) {
