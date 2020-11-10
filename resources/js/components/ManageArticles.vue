@@ -13,16 +13,16 @@
                         <textarea type="text" class="form-control" placeholder="Enter Body" v-model="article.body"></textarea>
                     </div>
                     <div class="text-right">
-                        <button type="submit" @click="" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
 
                 </form>
             </b-modal>
         </div>
 
-        <Pagination v-bind:pagination="pagination" @fetchArticlesNextPageUrl="fetchArticles"/>
+        <Pagination />
 
-        <Article v-for="article in articles" v-bind:article="article" v-bind:key="article.id" @deleteArticleEvent="deleteArticle" @editArticleEvent="editArticle"/>
+        <Article v-for="article in getArticles" :article="article" :key="article.id" @deleteArticleEvent="deleteArticle" @editArticleEvent="editArticle"/>
 
     </div>
 </template>
@@ -39,14 +39,12 @@
         },
         data() {
             return {
-                articles: [],
                 article: {
                     id: '',
                     title: '',
                     body: ''
                 },
                 article_id: '',
-                pagination: {},
                 edit: false,
                 modal_article_title: 'Add New Article'
             }
@@ -55,34 +53,19 @@
         created() {
             this.fetchArticles();
         },
-
+        computed: {
+            getArticles() {
+                return this.$store.getters.getArticles
+            },
+            getPagination() {
+                return this.$store.getters.getPagination
+            }
+        },
         methods: {
             fetchArticles(page_url) {
-                // console.log(axios.defaults.baseURL);
-
-                let vm = this;
-                page_url = page_url || 'articles'
-                axios.get(page_url)
-                    .then(response => {
-                        console.log(response);
-                        this.articles = response.data.data;
-                        vm.makePagination(response.data.meta, response.data.links);
-                    })
-                    .catch(error => console.log(error))
-            },
-            makePagination(meta, links) {
-                // console.log('makePagination here')
-                let pagination = {
-                    current_page: meta.current_page,
-                    last_page: meta.last_page,
-                    next_page_url: links.next,
-                    prev_page_url: links.prev
-                };
-
-                this.pagination = pagination
+                this.$store.dispatch('fetchArticles', page_url)
             },
             deleteArticle(id) {
-                // console.log('delete works');
                 axios.delete(`article/${id}`, {
                     method: 'delete'
                 })

@@ -1,16 +1,16 @@
 <template>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li v-bind:class="[{disabled: !pagination.prev_page_url }]" class="page-item">
-                <a @click="fetchArticles(pagination.prev_page_url)" class="page-link" href="#">Previous</a>
+            <li v-bind:class="[{disabled: !getPagination.prev_page_url }]" class="page-item">
+                <a @click="fetchArticles(getPagination.prev_page_url)" class="page-link" href="#">Previous</a>
             </li>
 
             <li class="page-item disabled">
-                <a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a>
+                <a class="page-link text-dark" href="#">Page {{ getPagination.current_page }} of {{ getPagination.last_page }}</a>
             </li>
 
-            <li v-bind:class="[{disabled: !pagination.next_page_url }]" class="page-item">
-                <a @click="fetchArticles(pagination.next_page_url)" class="page-link" href="#">Next</a>
+            <li v-bind:class="[{disabled: !getPagination.next_page_url }]" class="page-item">
+                <a @click="fetchArticles(getPagination.next_page_url)" class="page-link" href="#">Next</a>
             </li>
         </ul>
     </nav>
@@ -19,13 +19,14 @@
 <script>
     export default {
         name: 'Pagination',
-        props: {
-            pagination: Object,
-            required: true,
+        computed: {
+            getPagination() {
+                return this.$store.getters.getPagination
+            }
         },
         methods: {
             fetchArticles(next_page_url) {
-                this.$emit('fetchArticlesNextPageUrl', next_page_url)
+                this.$store.dispatch('fetchArticles', next_page_url)
             }
         }
     }
