@@ -42,10 +42,9 @@
                 article: {
                     id: '',
                     title: '',
-                    body: ''
+                    body: '',
+                    edit: false,
                 },
-                article_id: '',
-                edit: false,
                 modal_article_title: 'Add New Article'
             }
         },
@@ -59,46 +58,27 @@
             },
             getPagination() {
                 return this.$store.getters.getPagination
-            }
+            },
         },
         methods: {
             fetchArticles(page_url) {
                 this.$store.dispatch('fetchArticles', page_url)
             },
             addArticle() {
-                if(this.edit === false) {
-                    axios.post('article', {
-                        'title': this.article.title,
-                        'body': this.article.body
-                    })
-                        .then(data => {
-                            this.article.title = ''
-                            this.article.body = ''
-                            this.$bvModal.hide('modal-article')
-                            alert('Article Added')
-                            this.fetchArticles()
-                        })
-                        .catch(error => console.log(error))
-                } else {
-                    axios.put('article', {
-                        'article_id': this.article.id,
-                        'title': this.article.title,
-                        'body': this.article.body
-                    })
-                        .then(data => {
-                            this.article.title = ''
-                            this.article.body = ''
-                            this.$bvModal.hide('modal-article')
-                            alert('Article Updated')
-                            this.fetchArticles()
-                        })
-                        .catch(err => console.log(err))
-                }
+                this.$store.dispatch('addArticle', {
+                    'id': this.article.id,
+                    'title': this.article.title,
+                    'body': this.article.body,
+                    'edit': this.article.edit,
+                })
+
+                this.$bvModal.hide('modal-article')
+                this.article.title = ''
+                this.article.body = ''
             },
             editArticle(article) {
-                this.edit = true
+                this.article.edit = true
                 this.article.id = article.id
-                this.article.article_id = article.id
                 this.article.title = article.title
                 this.article.body = article.body
                 this.modal_article_title = 'Edit Article'
