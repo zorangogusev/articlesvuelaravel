@@ -52,6 +52,9 @@
 
         created() {
             this.fetchArticles();
+            this.$toast.success({
+                title: 'Welcome ' + this.$store.getters.getLoggedInUserName,
+            })
         },
         computed: {
             getArticles() {

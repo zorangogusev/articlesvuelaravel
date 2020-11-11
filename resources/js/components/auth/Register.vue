@@ -4,6 +4,8 @@
         <ValidationObserver v-slot="{ handleSubmit }">
             <form action="#" @submit.prevent="handleSubmit(register)" :keyup.enter="register">
 
+<!--                <div v-if="successMessage" class="success-message">{{ successMessage }}</div>-->
+
                 <div v-if="errorFromServer" class="error-from-server">
                     <div v-for="(value,key) in errorFromServer" :key="key">
                         {{ value[0] }}
@@ -48,6 +50,7 @@
                 email: '',
                 password: '',
                 errorFromServer: '',
+                successMessage: '',
             }
         },
         methods: {
@@ -58,12 +61,16 @@
                     'password': this.password,
                 })
                     .then(result => {
-                        this.$router.push({ name: 'login' })
+                        this.successMessage = 'Registered Successfully'
+                        this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
+                        this.$toast.success({
+                            title: this.successMessage,
+                            message:'You can login here'
+                        })
+
                     })
                     .catch(error => {
-                        console.log(error.response)
-                        console.log(error.response.data.errors)
-                        console.log(Object.values(error.response.data.errors))
+                        // console.log(Object.values(error.response.data.errors))
                         this.errorFromServer = Object.values(error.response.data.errors)
                     })
             }

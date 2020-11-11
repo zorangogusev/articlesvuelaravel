@@ -34,6 +34,7 @@ export default new VueRouter({
             path: '/login',
             name: 'login',
             component: Login,
+            props: true,
             meta: {
                 requiresGuest: true,
             }

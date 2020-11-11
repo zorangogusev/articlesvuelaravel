@@ -64,4 +64,12 @@
     .input-error {
         border: 1px solid red;
     }
+    .success-message {
+        background-color: #dff0d8;
+        color: #3c783d;
+        margin-bottom: 12px;
+        font-size: 16px;
+        padding: 10px 16px;
+        border-radius: 4px;
+    }
 </style>

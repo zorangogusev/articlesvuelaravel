@@ -4,6 +4,7 @@
         <ValidationObserver v-slot="{ handleSubmit }">
             <form action="#" @submit.prevent="handleSubmit(login)" :keyup.enter="login">
 
+<!--                <div v-if="successMessage" class="success-message">{{ successMessage }}</div>-->
                 <div v-if="errorFromServer" class="error-from-server">{{ errorFromServer }}</div>
 
                 <ValidationProvider name="username" rules="required|email" v-slot="{ errors }">
@@ -32,11 +33,17 @@
 <script>
     export default {
         name: 'Login',
+        props: {
+            dataSuccessMessage: {
+                type: String,
+            }
+        },
         data() {
             return {
                 username: '',
                 password: '',
                 errorFromServer: '',
+                successMessage: this.dataSuccessMessage,
             }
         },
         methods: {
@@ -47,12 +54,13 @@
                 })
                     .then(response => {
                         this.$store.dispatch('getLoggedInUserName')
-                        this.$router.push({ name: 'manage-articles'})
+                        this.$router.push({name: 'manage-articles'})
                     })
                     .catch(error => {
                         // console.log(error.response.data)
                         this.password = ''
                         this.errorFromServer = error.response.data
+                        this.successMessage = ''
                     })
             }
         }

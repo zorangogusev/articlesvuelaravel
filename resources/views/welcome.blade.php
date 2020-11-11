@@ -10,7 +10,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+        <style src="cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css"></style>
     </head>
     <body class="antialiased">
         <div id="app">
