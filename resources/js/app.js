@@ -8,6 +8,12 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import AnimateCss from 'animate.css/animate.min.css'
 import {store}  from './store/store'
 
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm'
+import { ValidationObserver } from 'vee-validate'
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 Vue.use(BootstrapVue)
 Vue.use(AnimateCss)
 

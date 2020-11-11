@@ -25,13 +25,11 @@
     /* Auth Pages */
     label {
         display: block;
+        margin-top: 24px;
         margin-bottom: 4px;
     }
     .login-heading {
         margin-bottom: 16px;
-    }
-    .form-control {
-        margin-bottom: 24px;
     }
     .login-form {
         max-width: 500px;
@@ -50,7 +48,6 @@
     .btn-submit:hover {
         opacity: 0.8;
     }
-
     .error-from-server {
         margin-bottom: 12px;
         font-size: 16px;
@@ -59,5 +56,12 @@
         background: #F3DEDE;
         border-radius: 4px;
     }
-
+    .form-error {
+        font-size: 16px;
+        color: #a94442;
+        font-style: italic;
+    }
+    .input-error {
+        border: 1px solid red;
+    }
 </style>
