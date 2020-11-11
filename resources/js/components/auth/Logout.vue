@@ -9,6 +9,7 @@
                 .then(response => {
                     this.$router.push({ name: 'home'})
                 })
+            this.$store.dispatch('deleteLoggedInUserName')
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="login-form">
         <h2 class="login-heading">Register</h2>
-        <form action="#" @submit.prevent="register">
+        <form action="#" @submit.prevent="register" :keyup.enter="register">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control" v-model="name">

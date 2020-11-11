@@ -1,7 +1,7 @@
 <template>
     <div class="login-form">
         <h2 class="login-heading">Login</h2>
-        <form action="#" @submit.prevent="login">
+        <form action="#" @submit.prevent="login" :keyup.enter="login">
             <div class="form-group">
                 <label for="username">Username/Email</label>
                 <input type="email" name="username" id="username" class="form-control" v-model="username">
@@ -34,6 +34,7 @@
                     'password': this.password,
                 })
                     .then(response => {
+                        this.$store.dispatch('getLoggedInUserName')
                         this.$router.push({ name: 'manage-articles'})
                     })
                     .catch(error => {

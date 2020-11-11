@@ -8,6 +8,7 @@
                 <router-link v-if="!loggedIn" to="/login">Login</router-link>
                 <router-link v-if="!loggedIn" to="/register">Register</router-link>
                 <router-link v-if="loggedIn" to="/logout">Logout</router-link>
+                <a v-if="loggedIn" href="javascript:void(0)">Welcome {{ getLoggedInUserName }}</a>
             </ul>
         </div>
     </nav>
@@ -19,6 +20,9 @@
         computed: {
             loggedIn() {
                 return this.$store.getters.loggedIn
+            },
+            getLoggedInUserName() {
+                return this.$store.getters.getLoggedInUserName
             }
         }
     }

@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
     state: {
         articles: [],
         pagination: {},
-        token: localStorage.getItem('access_token') || null
+        token: localStorage.getItem('access_token') || null,
+        loggedInUserName: null,
     },
     getters: {
         getArticles(state) {
@@ -20,7 +21,10 @@ export const store = new Vuex.Store({
         },
         loggedIn(state) {
             return state.token !== null
-        }
+        },
+        getLoggedInUserName (state) {
+            return state.loggedInUserName
+        },
     },
     mutations: {
         fetchArticles(state, articles) {
@@ -34,6 +38,12 @@ export const store = new Vuex.Store({
         },
         destroyToken(state) {
             state.token = null
+        },
+        getLoggedInUserName(state, getLoggedInUserName) {
+            state.loggedInUserName = getLoggedInUserName
+        },
+        deleteLoggedInUserName(state) {
+            state.loggedInUserName = null
         }
     },
     actions: {
@@ -151,7 +161,28 @@ export const store = new Vuex.Store({
 
                 })
             }
-        }
-    }
+        },
+        getLoggedInUserName(context) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
 
+            // return new Promise((resolve, reject) => {
+                axios.get('user')
+                    .then(result => {
+                        console.log('result is: ' + result.data.name)
+
+                        context.commit('getLoggedInUserName', result.data.name)
+
+                        // resolve(result)
+                    })
+                    .catch(error => {
+                        // console.log('error is: ' + error)
+                        reject(error)
+                    })
+
+            // })
+        },
+        deleteLoggedInUserName(context) {
+            context.commit('deleteLoggedInUserName')
+        },
+    }
 })
