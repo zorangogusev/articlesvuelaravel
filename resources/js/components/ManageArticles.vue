@@ -41,6 +41,7 @@
             return {
                 article: {
                     id: '',
+                    user_id: '',
                     title: '',
                     body: '',
                     edit: false,
@@ -67,6 +68,7 @@
             addArticle() {
                 this.$store.dispatch('addArticle', {
                     'id': this.article.id,
+                    'user_id': this.article.user_id,
                     'title': this.article.title,
                     'body': this.article.body,
                     'edit': this.article.edit,
@@ -79,6 +81,7 @@
             editArticle(article) {
                 this.article.edit = true
                 this.article.id = article.id
+                this.article.user_id = article.user_id
                 this.article.title = article.title
                 this.article.body = article.body
                 this.modal_article_title = 'Edit Article'

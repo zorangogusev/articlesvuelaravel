@@ -39,6 +39,8 @@ to execute migrations and seeds enter in the docker bash in /var/www/html/articl
 
 to install passport use
     php artisan passport:install
+    -get the Client Secret from grant client-Client ID:2 and with it set in .env file the PASSPORT_CLIENT_SECRET
+     and PASSPORT_CLIENT=2
 
 in .env file(user own credentials)
     PASSPORT_LOGIN_ENDPOINT=http://articlesvuelaravel.deb.test:8080/oauth/token

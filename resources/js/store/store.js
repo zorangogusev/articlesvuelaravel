@@ -38,10 +38,12 @@ export const store = new Vuex.Store({
     },
     actions: {
         fetchArticles(context, page_url) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
+
             page_url = page_url || 'articles'
             axios.get(page_url)
                 .then(response => {
-                    // console.log(response);
+                    // console.log(response.data.data);
                     context.commit('fetchArticles', response.data.data)
                     let pagination = {
                         current_page: response.data.meta.current_page,
@@ -67,6 +69,7 @@ export const store = new Vuex.Store({
             } else {
                 axios.put('article', {
                     'article_id': article.id,
+                    'user_id': article.user_id,
                     'title': article.title,
                     'body': article.body
                 })

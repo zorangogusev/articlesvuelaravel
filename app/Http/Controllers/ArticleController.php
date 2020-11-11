@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->paginate(3);
+        $articles = Article::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(3);
 
         return ArticleResource::collection($articles);
     }
@@ -38,9 +38,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $article = $request->isMethod('put') ? Article::findOrFail($request->article_id) : new Article();
+        if($request->isMethod('put')) {
+            if($request->user_id !== auth()->user()->id) return response()->json('Unauthorized', 401);
+            $article = Article::findOrFail($request->article_id);
+        } else {
+            $article = new Article();
+        }
 
         $article->id = $request->input('article_id');
+        $article->user_id = auth()->user()->id;
         $article->title = $request->input('title');
         $article->body = $request->input('body');
 
@@ -61,29 +67,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -92,6 +75,8 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+
+        if($article->user_id !== auth()->user()->id) return response()->json('Unauthorized', 401);
 
         if($article->delete()) return new ArticleResource($article);
     }
