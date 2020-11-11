@@ -165,21 +165,18 @@ export const store = new Vuex.Store({
         getLoggedInUserName(context) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
 
-            // return new Promise((resolve, reject) => {
-                axios.get('user')
-                    .then(result => {
-                        console.log('result is: ' + result.data.name)
+            axios.get('user')
+                .then(result => {
+                    console.log('result is: ' + result.data.name)
 
-                        context.commit('getLoggedInUserName', result.data.name)
+                    context.commit('getLoggedInUserName', result.data.name)
 
-                        // resolve(result)
-                    })
-                    .catch(error => {
-                        // console.log('error is: ' + error)
-                        reject(error)
-                    })
-
-            // })
+                    // resolve(result)
+                })
+                .catch(error => {
+                    // console.log('error is: ' + error)
+                    reject(error)
+                })
         },
         deleteLoggedInUserName(context) {
             context.commit('deleteLoggedInUserName')

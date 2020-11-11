@@ -51,4 +51,13 @@
         opacity: 0.8;
     }
 
+    .error-from-server {
+        margin-bottom: 12px;
+        font-size: 16px;
+        padding: 10px 16px;
+        color: #a94442;
+        background: #F3DEDE;
+        border-radius: 4px;
+    }
+
 </style>

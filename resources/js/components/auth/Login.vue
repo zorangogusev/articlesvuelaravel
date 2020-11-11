@@ -2,6 +2,9 @@
     <div class="login-form">
         <h2 class="login-heading">Login</h2>
         <form action="#" @submit.prevent="login" :keyup.enter="login">
+
+            <div v-if="errorFromServer" class="error-from-server">{{ errorFromServer }}</div>
+
             <div class="form-group">
                 <label for="username">Username/Email</label>
                 <input type="email" name="username" id="username" class="form-control" v-model="username">
@@ -25,6 +28,7 @@
             return {
                 username: '',
                 password: '',
+                errorFromServer: '',
             }
         },
         methods: {
@@ -38,7 +42,9 @@
                         this.$router.push({ name: 'manage-articles'})
                     })
                     .catch(error => {
+                        // console.log(error.response.data)
                         this.password = ''
+                        this.errorFromServer = error.response.data
                     })
             }
         }
