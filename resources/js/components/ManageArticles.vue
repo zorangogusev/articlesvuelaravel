@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container page-main-div">
         <h1>Manage Articles</h1>
         <div class="text-right">
             <b-button v-b-modal.modal-article @click="modal_article_title = 'Add New Article'">Add New Article</b-button>
@@ -52,9 +52,6 @@
 
         created() {
             this.fetchArticles();
-            this.$toast.success({
-                title: 'Welcome ' + this.$store.getters.getLoggedInUserName,
-            })
         },
         computed: {
             getArticles() {

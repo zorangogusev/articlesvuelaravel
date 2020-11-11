@@ -2,7 +2,7 @@
     <div>
         <Navbar />
         <transition name="router-animation"
-                    enter-active-class="animate__animated animate__fadein"
+                    enter-active-class="animate__animated animate__fadeIn"
                     leave-active-class="animate__animated animate__fadeOut"
                     mode="out-in">
             <router-view></router-view>
@@ -64,6 +64,8 @@
     .input-error {
         border: 1px solid red;
     }
+    /* end Auth Pages */
+
     .success-message {
         background-color: #dff0d8;
         color: #3c783d;
@@ -72,4 +74,8 @@
         padding: 10px 16px;
         border-radius: 4px;
     }
+    .page-main-div {
+        transition: 0.2s
+    }
+
 </style>

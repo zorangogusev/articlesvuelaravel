@@ -1,5 +1,5 @@
 <template>
-    <div class="login-form">
+    <div class="login-form page-main-div">
         <h2 class="login-heading">Register</h2>
         <ValidationObserver v-slot="{ handleSubmit }">
             <form action="#" @submit.prevent="handleSubmit(register)" :keyup.enter="register">
