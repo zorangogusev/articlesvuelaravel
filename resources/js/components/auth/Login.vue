@@ -22,7 +22,12 @@
                     </div>
                 </ValidationProvider>
                 <div class="form-group">
-                    <button type="submit" class="btn-submit"> Login</button>
+                    <button type="submit" class="btn-submit" :disabled="loadingSpinner">
+                        <div class="lds-ring-container" v-if="loadingSpinner" >
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                        <div :class=" { 'hidden-div': loadingSpinner }">Login</div>
+                    </button>
                 </div>
 
             </form>
@@ -44,10 +49,12 @@
                 password: '',
                 errorFromServer: '',
                 successMessage: this.dataSuccessMessage,
+                loadingSpinner: false,
             }
         },
         methods: {
             login() {
+                this.loadingSpinner = true
                 this.$store.dispatch('getToken', {
                     'username': this.username,
                     'password': this.password,
@@ -55,12 +62,14 @@
                     .then(response => {
                         this.$store.dispatch('getLoggedInUserName')
                         this.$router.push({name: 'manage-articles'})
+                        this.loadingSpinner = false
                     })
                     .catch(error => {
                         // console.log(error.response.data)
                         this.password = ''
                         this.errorFromServer = error.response.data
                         this.successMessage = ''
+                        this.loadingSpinner = false
                     })
             }
         }

@@ -34,7 +34,12 @@
                     </div>
                 </ValidationProvider>
                 <div class="form-group">
-                    <button type="submit" class="btn-submit">Create Account</button>
+                    <button type="submit" class="btn-submit" :disabled="loadingSpinner">
+                        <div class="lds-ring-container" v-if="loadingSpinner" >
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                        <div :class=" { 'hidden-div': loadingSpinner }">Create Account</div>
+                    </button>
                 </div>
             </form>
         </ValidationObserver>
@@ -51,10 +56,12 @@
                 password: '',
                 errorFromServer: '',
                 successMessage: '',
+                loadingSpinner: false,
             }
         },
         methods: {
             register() {
+                this.loadingSpinner = true,
                 this.$store.dispatch('register', {
                     'name': this.name,
                     'email': this.email,
