@@ -120,6 +120,7 @@ export const store = new Vuex.Store({
                 .catch(err => console.log(err))
         },
         getToken(context, credentials) {
+            console.log('axios.defaults.baseURL is: ' + axios.defaults.baseURL)
 
             return new Promise((resolve, reject) => {
                 axios.post('login', {
@@ -127,7 +128,7 @@ export const store = new Vuex.Store({
                     'password': credentials.password,
                 })
                     .then(response => {
-                        // console.log('response is ' + response.data.access_token)
+                        console.log('response is ' + response.data.access_token)
 
                         const token = response.data.access_token
 
