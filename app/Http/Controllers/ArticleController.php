@@ -80,4 +80,11 @@ class ArticleController extends Controller
 
         if($article->delete()) return new ArticleResource($article);
     }
+
+    public function home()
+    {
+        $articles = Article::orderBy('created_at', 'desc')->paginate(3);
+
+        return ArticleResource::collection($articles);
+    }
 }

@@ -76,7 +76,7 @@
     }
     .page-main-div {
         padding: 20px;
-        transition: 0.2s
+        animation-duration: 0.2s;
     }
 
     .hidden-div {

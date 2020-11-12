@@ -3,11 +3,10 @@
         <h4>{{ article.title }}</h4>
         <p>{{ article.body }}</p>
         <hr>
-        <div>
+        <div v-if="loggedIn">
             <button @click="editArticle(article)" class="btn btn-dark">Edit</button>
             <button @click="deleteArticle(article.id)" class="btn btn-danger">Delete</button>
         </div>
-
     </div>
 </template>
 
@@ -18,6 +17,11 @@
             article: {
                 type: Object,
                 required: true,
+            }
+        },
+        computed: {
+            loggedIn() {
+                return this.$store.getters.loggedIn
             }
         },
         methods: {

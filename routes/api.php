@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function() {
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
+Route::get('home', [ArticleController::class, 'home']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::get('article/{id}', [ArticleController::class, 'show']);

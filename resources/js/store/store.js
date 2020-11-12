@@ -65,6 +65,23 @@ export const store = new Vuex.Store({
                 })
                 .catch(error => console.log(error))
         },
+        fetchArticlesForHomePage(context, page_url) {
+
+            page_url = page_url || 'home'
+            axios.get(page_url)
+                .then(response => {
+                    console.log(response.data.data);
+                    context.commit('fetchArticles', response.data.data)
+                    let pagination = {
+                        current_page: response.data.meta.current_page,
+                        last_page: response.data.meta.last_page,
+                        next_page_url: response.data.links.next,
+                        prev_page_url: response.data.links.prev
+                    };
+                    context.commit('pagination', pagination)
+                })
+                .catch(error => console.log(error))
+        },
         addArticle(context, article) {
             if(article.edit === false) {
                 axios.post('article', {
