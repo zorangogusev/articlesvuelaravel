@@ -10,7 +10,7 @@
                 <ValidationProvider name="username" rules="required|email" v-slot="{ errors }">
                     <div class="form-group">
                         <label for="username">Username/Email</label>
-                        <input type="email" name="username" id="username" class="form-control" :class="{ 'input-error': errors[0] }" v-model="username">
+                        <input type="email" name="username" id="username" ref="username" class="form-control" :class="{ 'input-error': errors[0] }" v-model="username">
                         <span class="form-error">{{ errors[0] }}</span>
                     </div>
                 </ValidationProvider>
@@ -52,7 +52,13 @@
                 loadingSpinner: false,
             }
         },
+        mounted() {
+            this.focusInput()
+        },
         methods: {
+            focusInput() {
+                this.$refs.username.focus()
+            },
             login() {
                 this.loadingSpinner = true
                 this.$store.dispatch('getToken', {

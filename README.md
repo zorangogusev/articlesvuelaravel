@@ -1,8 +1,17 @@
-Used Technologies
-Docker (PHP7.3, Maria-DB10.1), Laravel8.0
+SPA app for creating, editing, deleting, displaying articles, with registration and login for users
 
+Used Technologies
+Docker (PHP7.3, Maria-DB10.1), 
+Laravel8.0, 
+Vue.js(Vuex, Passport, BootstrapVue, VeeVaildate, AnimateCss, cxlt-vue2-toastr)
+
+Live demo on Heroku
+
+register, login and can add/edit/delete articles, and display them in home page
 
 ================================================================================
+
+Instalation
 
 sudo composer install
 sudo php artisan key:generate
@@ -16,8 +25,9 @@ to connect to database add/replace in .env file
     DB_PASSWORD=zoran   
 
 
-in .docker/dev/ folder 
-check-update-modify volumes on line 12 and line 26
+
+check/update/modify in docker/dev/docker-compose.yml file, volumes on line 12 and line 26
+check/update/modify .docker/dev/articlesvuelaravel.conf file
 
 change owner and permissions on storage folder
     sudo chmod -R 777 storage

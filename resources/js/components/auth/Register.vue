@@ -15,7 +15,7 @@
                 <ValidationProvider name="name" rules="required|alpha" v-slot="{ errors }">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" :class="{ 'input-error': errors[0] }" v-model="name">
+                        <input type="text" name="name" id="name" ref="name" class="form-control" :class="{ 'input-error': errors[0] }" v-model="name">
                         <span class="form-error">{{ errors[0] }}</span>
                     </div>
                 </ValidationProvider>
@@ -59,7 +59,13 @@
                 loadingSpinner: false,
             }
         },
+        mounted() {
+            this.focusInput()
+        },
         methods: {
+            focusInput() {
+                this.$refs.name.focus()
+            },
             register() {
                 this.loadingSpinner = true,
                 this.$store.dispatch('register', {
