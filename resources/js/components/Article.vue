@@ -3,7 +3,7 @@
         <h4>{{ article.title }}</h4>
         <p>{{ article.body }}</p>
         <hr>
-        <div v-if="loggedIn">
+        <div v-if="loggedIn && isManageArticlesRoute">
             <button @click="editArticle(article)" class="btn btn-dark">Edit</button>
             <button @click="deleteArticle(article.id)" class="btn btn-danger">Delete</button>
         </div>
@@ -22,6 +22,9 @@
         computed: {
             loggedIn() {
                 return this.$store.getters.loggedIn
+            },
+            isManageArticlesRoute() {
+                return this.$route.name == 'manage-articles'
             }
         },
         methods: {

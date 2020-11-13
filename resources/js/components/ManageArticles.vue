@@ -2,7 +2,7 @@
     <div class="container page-main-div">
         <h1>Manage Articles</h1>
         <div class="text-right">
-            <b-button v-b-modal.modal-article @click="modal_article_title = 'Add New Article'">Add New Article</b-button>
+            <b-button class="add-new-article-button" v-b-modal.modal-article @click="modal_article_title = 'Add New Article'">Add New Article</b-button>
 
             <b-modal id="modal-article" centered :title="modal_article_title" :hide-footer="true">
                 <form @submit.prevent="addArticle" class="mb-4">

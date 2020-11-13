@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         articles: [],
         pagination: {},
         token: localStorage.getItem('access_token') || null,
-        loggedInUserName: null,
+        loggedInUserName: localStorage.getItem('loggedInUserName') || null,
     },
     getters: {
         getArticles(state) {
@@ -73,7 +73,7 @@ export const store = new Vuex.Store({
             page_url = page_url || 'home'
             axios.get(page_url)
                 .then(response => {
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                     context.commit('fetchArticles', response.data.data)
                     let pagination = {
                         current_page: response.data.meta.current_page,
@@ -121,7 +121,7 @@ export const store = new Vuex.Store({
                 .catch(err => console.log(err))
         },
         getToken(context, credentials) {
-            console.log('axios.defaults.baseURL is: ' + axios.defaults.baseURL)
+            // console.log('axios.defaults.baseURL is: ' + axios.defaults.baseURL)
 
             return new Promise((resolve, reject) => {
                 axios.post('login', {
@@ -129,7 +129,7 @@ export const store = new Vuex.Store({
                     'password': credentials.password,
                 })
                     .then(response => {
-                        console.log('response is ' + response.data.access_token)
+                        // console.log('response is ' + response.data.access_token)
 
                         const token = response.data.access_token
 
@@ -165,9 +165,10 @@ export const store = new Vuex.Store({
                 return new Promise((resolve, reject) => {
                     axios.post('logout')
                         .then(result => {
-                            console.log('result is: ' + result)
+                            // console.log('result is: ' + result)
 
                             localStorage.removeItem('access_token')
+                            localStorage.removeItem('loggedInUserName')
                             context.commit('destroyToken')
 
                             resolve(result)
@@ -176,6 +177,7 @@ export const store = new Vuex.Store({
                             console.log('error is: ' + error)
 
                             localStorage.removeItem('access_token')
+                            localStorage.removeItem('loggedInUserName')
                             context.commit('destroyToken')
                             reject(error)
                         })
@@ -190,6 +192,7 @@ export const store = new Vuex.Store({
                 .then(result => {
                     console.log('result is: ' + result.data.name)
 
+                    localStorage.setItem('loggedInUserName', result.data.name)
                     context.commit('getLoggedInUserName', result.data.name)
 
                     // resolve(result)

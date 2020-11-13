@@ -125,4 +125,11 @@
 
     /* end spinner */
 
+    @media (max-width: 767px) {
+        .add-new-article-button {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
 </style>
