@@ -6,6 +6,7 @@ Vue.use(Vuex)
 // axios.defaults.baseURL = 'http://articlesvuelaravel.deb.test:8080/api/'
 // axios.defaults.baseURL  = location.protocol + "//" + window.location.hostname  + ":8080/api/";
 
+/* for heroku server */
 axios.defaults.baseURL  = location.protocol + "//" + window.location.hostname  + "/api/";
 
 export const store = new Vuex.Store({
