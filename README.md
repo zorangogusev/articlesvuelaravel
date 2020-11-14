@@ -5,7 +5,7 @@ Docker (PHP7.3, Maria-DB10.1),
 Laravel8.0, 
 Vue.js(Vuex, Passport, BootstrapVue, VeeVaildate, AnimateCss, cxlt-vue2-toastr)
 
-Live demo on Heroku
+Live demo on Heroku http://app-articlesvuelaravel.herokuapp.com/
 
 register, login and can add/edit/delete articles, and display them in home page
 
@@ -13,8 +13,8 @@ register, login and can add/edit/delete articles, and display them in home page
 
 Instalation
 
-sudo composer install
-sudo php artisan key:generate
+sudo composer install <br/>
+sudo php artisan key:generate <br/>
 
 to connect to database add/replace in .env file
     DB_CONNECTION=mysql
