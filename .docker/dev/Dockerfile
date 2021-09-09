@@ -53,7 +53,7 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #PROJECT SPECIFIC
-ENV XDEBUG_CONFIG "idekey=phpstorm-xdebug"
+ENV XDEBUG_CONFIG "idekey=PHPSTORM"
 ENV YII_ENVIRONMENT "DEVELOPMENT"
 # COPY ENV variables to etc
 RUN env | grep = >> /etc/environment

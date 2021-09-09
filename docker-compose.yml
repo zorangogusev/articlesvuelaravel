@@ -2,12 +2,12 @@ version: "3.2"
 services:
     articlesvuelaravel:
         build:
-            context: .
+            context: .docker/dev
             dockerfile: Dockerfile
         container_name: articlesvuelaravel
         networks:
           articlesvuelaravel_net:
-            ipv4_address: 172.172.201.100
+            ipv4_address: 172.172.209.100
         volumes:
             - /var/www/html/vue-lessons/articlesvuelaravel/:/var/www/html/articlesvuelaravel
         links:
@@ -21,7 +21,7 @@ services:
         container_name: articlesvuelaravel-mariadb-10.1
         networks:
           articlesvuelaravel_net:
-            ipv4_address: 172.172.201.101
+            ipv4_address: 172.172.209.101
         volumes:
             - ../db_data:/var/lib/mysql
         environment:
@@ -38,4 +38,4 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.172.201.0/24
+      - subnet: 172.172.209.0/24
